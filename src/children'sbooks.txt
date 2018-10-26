@@ -1,0 +1,6 @@
+The Little Worm,5.00,10
+Goodnight Moon,7.00,10
+Charlotte's Web,9.00,10
+Green Eggs and Ham,10.00,10
+The Snowy Day,10.00,10
+Little Lamb,12.00,11

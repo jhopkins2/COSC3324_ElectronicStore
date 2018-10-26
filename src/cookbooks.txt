@@ -1,0 +1,7 @@
+Cooking 101,15.00,0
+The Joy of Cooking,15.00,10
+How to Cook Everything,15.00,10
+The Silver Spoon,10.00,9
+The Zuni Cafe,10.00,9
+American Cookery,10.00,8
+Cooking for Dummies,20.00,15
