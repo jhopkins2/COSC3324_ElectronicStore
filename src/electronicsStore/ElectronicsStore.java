@@ -18,9 +18,9 @@ public class ElectronicsStore
     {
         System.out.println("Welcome to the TAMUCC electronics store."); //prompts user with output text
         
-        ElectronicsStoreSystem ES_System = new ElectronicsStoreSystem(); //creates new BookStoreSystem object BS_System
+        ElectronicsStoreSystem ES_System = new ElectronicsStoreSystem(); //creates new  ElectronicsStoreSystem object ES_System
         
-        ES_System.AuthenticateUser(); //calls BS_System function
+        ES_System.AuthenticateUser(); //calls ES_System function
         
     }
 }

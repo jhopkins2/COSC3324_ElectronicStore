@@ -59,7 +59,7 @@ public class MemberList
             
             String[] arr = Current.split(",");
             
-            if (arr.length < 9)
+            if (arr.length < 11)
             {
                 continue;
             }

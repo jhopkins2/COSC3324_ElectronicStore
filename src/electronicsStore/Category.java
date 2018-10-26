@@ -5,8 +5,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 /**
- * Category class utilizes the Book class to create a list in which
- * is used to access, modify, display and instantiate Book objects
+ * Category class utilizes the Item class to create a list in which
+ * is used to access, modify, display and instantiate Item objects
  * 
  */
 
