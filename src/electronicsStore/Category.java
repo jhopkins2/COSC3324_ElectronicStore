@@ -79,7 +79,7 @@ public class Category
         return null;
     }
     public ArrayList<Item> getItems(){ //array function
-        return (ArrayList<Item>) this.items.clone(); //copies from arrayList books
+        return (ArrayList<Item>) this.items.clone(); //copies from arrayList items
     }
     
     private void setName(String name){ //mutator function
@@ -95,7 +95,7 @@ public class Category
         }
     }
 
-    //function adds book to arrayList books
+    //function adds book to arrayList items
     public void addItem(Item item) throws IOException {
         this.items.add(item);
     }

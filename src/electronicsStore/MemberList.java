@@ -21,7 +21,7 @@ public class MemberList
         {
             int premium = (Current.getPremium() == true ? 1 : 0);
             
-            String memberdata = String.format("%s,%s,%d,%s,%s,%s,%s,%d,%.2f,%d\n", Current.getUsername(), Current.getPassword(), Current.getMemID(), Current.getFirst(), Current.getInitial(), Current.getLast(), Current.getEmail(), Current.getPaypal(), Current.getPoints(), premium);
+            String memberdata = String.format("%s,%s,%d,%s,%s,%s,%s,%s,%d,%b\n", Current.getUsername(), Current.getPassword(), Current.getMemID(), Current.getFirst(), Current.getInitial(), Current.getLast(), Current.getEmail(), Current.getPhone(),Current.getPoints(), premium );
             
             contents = contents + memberdata;
         }
@@ -72,8 +72,8 @@ public class MemberList
             char mInitial = arr[4].charAt(0);
             String lName = arr[5];
             String email = arr[6];
+            String phone = arr[7];
             
-            int paypal = Integer.parseInt(arr[7].trim());
             
             int points = Integer.parseInt(arr[8]);
             
@@ -81,7 +81,7 @@ public class MemberList
             
             boolean premium = (ipremium == 1);
             
-            Member newMember = new Member(username, password, fName, lName, mInitial, email, premium, points, memID, paypal);
+            Member newMember = new Member(username, password, fName, lName, mInitial, email, phone, points, memID, premium);
             this.add(newMember);
         }
     }

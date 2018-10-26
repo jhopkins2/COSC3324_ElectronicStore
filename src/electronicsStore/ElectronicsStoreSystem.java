@@ -83,7 +83,7 @@ public class ElectronicsStoreSystem
                         this.memberList.add(newMember);
                         this.memberList.updateMembers();
 
-                        System.out.format("\n\nCongratulations %s %s %s, you've registered successfully."
+                        System.out.format("\n\nSuccess! %s %s %s, you are now registered!"
                                         + "\nTo login, use these credentials:\nUsername: %s\nPassword: %s\n\n\n", 
                                         newMember.getFirst(), newMember.getInitial(), newMember.getLast(), 
                                         newMember.getUsername(), newMember.getPassword());
@@ -125,7 +125,7 @@ public class ElectronicsStoreSystem
                     
                     this.itemCatalog.showCategories(false);
                     
-                    Category placeCat = this.itemCatalog.inputCategory("* Enter the category in which you wish to place the book: "); //user inputs data
+                    Category placeCat = this.itemCatalog.inputCategory("* Enter the category in which you wish to place the item: "); //user inputs data
                     
                     if (placeCat != null)
                     {
@@ -219,13 +219,13 @@ public class ElectronicsStoreSystem
                         String input = FileUtility.stringInput("Are you sure you want to upgrade for $2.99 a month: [y/n]"); //user inputs string variable
                         if (input.equalsIgnoreCase("y") || input.equalsIgnoreCase("yes"))
                         {
-                            System.out.println("You have been upgraded to premium membership, congratulations."); 
+                            System.out.println("You have been upgraded to 'Geek' membership, congratulations!"); 
                             this.currentUser.setPremium(true); 
                             this.memberList.updateMembers();
                         }
                         else
                         {
-                            System.out.println("You have declined the Geek membership offer.");
+                            System.out.println("You have declined the 'Geek' membership offer.");
                         }
                     }
                     
@@ -301,7 +301,7 @@ public class ElectronicsStoreSystem
      */
     public void writePurchaseHistory(Item purchaseItem){
         String timeStamp = new SimpleDateFormat("MM/dd/yyyy KK:mm:ss a").format(new Date());
-        String history = String.format("%s,%s,[%s] %s - Book: %s Price: %.2f\n", this.currentUser.getMemID(), this.currentUser.getUsername(), timeStamp, this.currentUser.getUsername(), purchaseItem.getName(), purchaseItem.getPrice());
+        String history = String.format("%s,%s,[%s] %s - Item: %s Price: %.2f\n", this.currentUser.getMemID(), this.currentUser.getUsername(), timeStamp, this.currentUser.getUsername(), purchaseItem.getName(), purchaseItem.getPrice());
         FileUtility.writeContent("PurchaseHistory.txt", history, true);
     }
     /**

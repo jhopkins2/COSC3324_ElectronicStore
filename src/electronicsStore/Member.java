@@ -14,7 +14,7 @@ public class Member extends User //declaration of member class which inherits fr
     private boolean premium;
     private int points;
     private int memId;
-    private int paypal;
+    private String phone;
     
     //default constructor
     public Member(){
@@ -23,23 +23,24 @@ public class Member extends User //declaration of member class which inherits fr
         this.setLast(null);
         this.setInitial('0');
         this.setEmail(null);
-        this.setPremium(false);
         this.setPoints(0);
         this.setMemID(0);
-        this.setPayPal(0);
+        this.setPhone(null);
+        this.setPremium(false);
+ 
     }
     //used by method updateMembers in Memberlist class parameterized constructor
     public Member(String user, String password, String first, String last, char initial, 
-            String email, boolean premium, int points, int MemID, int paypal){
+            String email,String phone, int points, int MemID, boolean premium){
         super(user, password);
         this.setFirst(first);
         this.setLast(last);
         this.setInitial(initial);
         this.setEmail(email);
-        this.setPremium(premium);
         this.setPoints(points);
         this.setMemID(MemID);
-        this.setPayPal(paypal);
+        this.setPhone(phone);
+        this.setPremium(premium);
     }
     
     public void setFirst(String fName){ //mutator function to assign variable stores users first name.
@@ -54,19 +55,18 @@ public class Member extends User //declaration of member class which inherits fr
     public void setEmail(String email){
         this.email = email;
     }
-    public void setPremium(boolean premium){ //mutator function assigns users premium status
-        this.premium = premium;
-    }
     public void setPoints(int points){
         this.points = points;
     }
     public void setMemID(int memId){ //mutator function assigns member ID with parameter
         this.memId = memId;
     }
-    public void setPayPal(int num){
-        this.paypal = num;
+    public void setPhone(String phone) {
+    	this.phone = phone;
     }
-    
+     public void setPremium(boolean premium){ //mutator function assigns users premium status
+        this.premium = premium;
+    }
     public String getFirst(){
         return fName;
     }
@@ -79,19 +79,18 @@ public class Member extends User //declaration of member class which inherits fr
     public String getEmail(){
         return email;
     }
-    public boolean getPremium(){
-        return premium;
-    }
     public int getPoints(){ //accessor function returns user's points
         return points;
     }
     public int getMemID(){
         return memId;
     }
-    public int getPaypal(){
-        return paypal;
+    public String getPhone() {
+    	return phone;
     }
-    
+    public boolean getPremium(){
+        return premium;
+    }
     /**
      * function takes users current purchasing points accumulates and stores them.
      * @param points 
@@ -120,10 +119,10 @@ public class Member extends User //declaration of member class which inherits fr
 
             String emailAddress = FileUtility.stringInput("* Enter E-Mail: ");
             this.setEmail(emailAddress);
-
-            int paypalNumber = FileUtility.integerInput("* Enter Paypal Account Number: ");
-            this.setPayPal(paypalNumber);
             
+            String phone= FileUtility.stringInput("Enter Phone Number: ");
+            this.setPhone(phone);
+
             return true;
         }
         
@@ -133,10 +132,10 @@ public class Member extends User //declaration of member class which inherits fr
             return false;
         }
     }
-    //function to output information on bookstore members
+    //function to output information on electronic store members
     public void showMemberInfo(){
         
         System.out.println("---Member Information---");
-        System.out.format(" %-20s %s %s %s\n %-20s %d\n %-20s %s\n %-20s %d\n %-20s %b\n","User:", this.getFirst(),  this.getInitial(),  this.getLast(), "Member ID:", this.getMemID(), "E-mail Address:", this.getEmail(), "PayPal Account #:",this.getPaypal(), "Premium Member:", this.getPremium());
+        System.out.format(" %-20s %s %s %s\n %-20s %d\n %-20s %s\n %-20s %d\n %-20s %b\n","User:", this.getFirst(),  this.getInitial(),  this.getLast(), "Member ID:", this.getMemID(), "E-mail Address:", this.getEmail(),"Phone Number: ",this.getPhone(), "Premium Member:", this.getPremium());
     }
 }
