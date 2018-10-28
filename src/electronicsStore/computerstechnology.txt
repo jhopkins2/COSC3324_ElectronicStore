@@ -1,6 +1,0 @@
-Computer Networking,10.00,9
-Introduction to Algorithms,20.00,10
-The C Programming Language,20.00,10
-The Elements of Computing,15.00,10
-Compiler Principles,20.00,8
-Data Structures with C++,200.00,4

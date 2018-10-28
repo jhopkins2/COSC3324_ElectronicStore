@@ -1,7 +1,7 @@
 package electronicsStore;
 
 /**
- * The User class is meant to retrieve username and password input data from 
+ * The User class is to retrieve username and password input data from 
  * the user and store mutator, accessor and validation functions
  * 
  */

@@ -233,7 +233,7 @@ public class ElectronicsStoreSystem
                 case 5:
                     if (this.currentUser.getPremium())
                     {
-                        System.out.format("You currently have %.2f Geek points.\n", this.currentUser.getPoints()); //prints and calculates users premium points
+                        System.out.format("You currently have %d Geek points.\n", this.currentUser.getPoints()); //prints and calculates users premium points
                     }
                     else
                     {
