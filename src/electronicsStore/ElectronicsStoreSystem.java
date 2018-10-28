@@ -103,9 +103,8 @@ public class ElectronicsStoreSystem
         }  
     }
     /**
-     * Function design to implement an interface for an administrator user of bookstore
-     * administrator user may add books, view member orders or add new administrator
-     * @throws IOException 
+     * Administration Interface
+     * Allows admins to add new products, read member purchase history, and add new admins to the system
      */
     void AdminInterface() throws IOException {
         System.out.println("\n\n\n*--Welcome Administrator.--*");
@@ -114,48 +113,48 @@ public class ElectronicsStoreSystem
         
         while(cont)
         {
-            option = FileUtility.integerInput("\n- Admin Menu -\n1. Add New Item \n2. Read Purchase History\n3. Show Members\n4. Show Admins\n5. Add Admin\n6. Log out\n\n---Please select an option---\n"); //prompt user of switch statement options
+            option = FileUtility.integerInput("\n- Admin Menu -\n1. Add New Item \n2. Read Purchase History\n3. Show Members\n4. Show Admins\n5. Add Admin\n6. Log out\n\n---Please select an option---\n"); //admins menu options
             
             switch(option) 
             {
-                case 1:
-                    Item newItem = new Item(); //create new object from Item class
-                    newItem.registerNewItem(); //call function from new object to add a new item
+                case 1:// registering a new item to the system
+                    Item newItem = new Item(); //creates the new item 
+                    newItem.registerNewItem(); //registers that a new item will be added
                     
                     this.itemCatalog.showCategories(false);
                     
-                    Category placeCat = this.itemCatalog.inputCategory("* Enter the category in which you wish to place the item: "); //user inputs data
+                    Category placeCat = this.itemCatalog.inputCategory("* Enter the category in which you wish to place the item: "); //prompt where to places the new item
                     
-                    if (placeCat != null)
+                    if (placeCat != null)//if category is valid
                     {
-                        placeCat.addItem(newItem); //calls function to add newItem object to placeCat arrayList
-                        placeCat.updateDatabase(); //calls function to update database
+                        placeCat.addItem(newItem); //calls to add new item 
+                        placeCat.updateDatabase(); //calls to update the database of items
                         
                          System.out.format("\n\nYou've added a new Item successfully.\nItem Information:\nName: %s\nPrice: %s\n", newItem.getName(), newItem.getPrice());
                     }
-                    else
+                    else //if they entered an invalid category
                     {
                         System.out.println("Invalid Category");
                     }
                     
                     break;
-                case 2:
+                case 2: //calls function to read a users purchase history
                     this.readPurchaseHistory();
                     break;
-                case 3:
-                    this.memberList.showMembers(); //calls function to print member users
+                case 3://calls function to show all currently registered member users
+                    this.memberList.showMembers(); 
                     break;
-                case 4:
-                    this.adminList.showAdmins(); //calls function to print admin users
+                case 4://calls function to show all currently registered admin users
+                    this.adminList.showAdmins(); 
                     break;
-                case 5:
-                    Admin newAdmin = new Admin(); //create new object from Admin Class
-                    if (newAdmin.register(this.adminList)) //call function from new object to register new administrator
+                case 5://to register a new admin to the system
+                    Admin newAdmin = new Admin(); //create new admin object
+                    if (newAdmin.register(this.adminList)) //call to register the new admin to the array
                     {                    
-                        this.adminList.add(newAdmin); //add newAdmin to adminList array
-                        this.adminList.UpdateAdminFile();
+                        this.adminList.add(newAdmin); //adds the new admin to the adminList
+                        this.adminList.UpdateAdminFile();//updates the data file of admins
 
-                        System.out.format("\n\nCongratulations, you've successfully registered an Admin! \nTo login, use:\nUsername: %s\nPassword: %s\n", newAdmin.getUsername(), newAdmin.getPassword());
+                        System.out.format("\n\nSuccess! You have registered an Admin! \nTo login, use:\nUsername: %s\nPassword: %s\n", newAdmin.getUsername(), newAdmin.getPassword());
                         
                         break;
                     }
@@ -163,19 +162,18 @@ public class ElectronicsStoreSystem
                     {
                         break;
                     }
-                case 6:
+                case 6://for exit
                     cont = false;
                     break;  
-                default:
+                default://if entered an invalid input
                     System.out.println("**Enter a valid value! (1-6)**");
                     break;
             }
         }
     }
     /**
-     * Function implements an interface for member users to sign up, login,
-     * view item, view personal info, and purchase items
-     * @throws IOException 
+     * Member Interface displayed for successful login of user. Here they should be able to view the store items, 
+     * view their user information, purchase items, upgrade their membership, view membership points, and exit the system. 
      */
     void MemberInterface() throws IOException {
         System.out.format("Hello, %s %s %s. Welcome to Another Amazon Wannabe electronics store.\n", this.currentUser.getFirst(), this.currentUser.getInitial(), this.currentUser.getLast());
@@ -185,16 +183,16 @@ public class ElectronicsStoreSystem
 
         while(cont)
         {
-            option = FileUtility.integerInput("\n- Member Menu -\n1. View Catalog\n2. View Membership Info\n3. Buy Item\n4. Upgrade Membership\n5. View Points\n6. Log out\n\n---Please select an option---\n");
+            option = FileUtility.integerInput("\n- Member Menu -\n1. View Catalog\n2. View Membership Info\n3. Buy Item\n4. Upgrade Membership\n5. View Points\n6. Log out\n\n---Please select an option---\n");//User menu options
             switch(option)
             {
-                case 1: 
-                    this.itemCatalog.showCategories(); //calls function prints item catalog to user
+                case 1: //to view the catalog of items offered
+                    this.itemCatalog.showCategories(); //calls to show the present categories
                     break;
-                case 2: 
-                    this.currentUser.showMemberInfo(); //calls function to show current user information
+                case 2: //to view the current users information
+                    this.currentUser.showMemberInfo(); //calls to show member information
                     break;
-                case 3:
+                case 3://to buy an item from the store
                     System.out.println("---Item Category Selection---");
                     this.itemCatalog.showCategories(false);
                     System.out.println("\n");
@@ -208,52 +206,50 @@ public class ElectronicsStoreSystem
                     this.PurchaseItem(inputCategory, inputItem);
                     
                     break;
-                case 4:
-                    if (this.currentUser.getPremium()) //conditional statement validates user status
+                case 4://to upgrade a membership to premium status: "Geek"
+                    if (this.currentUser.getPremium()) //checks the users information to see if already a premium member
                     {
                         System.out.println("You are already a Geek member.");
                     }
-                    else
+                    else//if not a "geek"
                     {
-                        String input = FileUtility.stringInput("Are you sure you want to upgrade to 'Geek'?: [y/n]"); //user inputs string variable
-                        if (input.equalsIgnoreCase("y") || input.equalsIgnoreCase("yes"))
+                        String input = FileUtility.stringInput("Are you sure you want to upgrade to 'Geek'?: Y/N"); //asks user if they wish to upgrade
+                        if (input.equalsIgnoreCase("y") || input.equalsIgnoreCase("yes"))//validates user input and checks for yes response
                         {
                             System.out.println("You have been upgraded to 'Geek' membership, congratulations!"); 
-                            this.currentUser.setPremium(true); 
-                            this.memberList.updateMembersFile();
+                            this.currentUser.setPremium(true); //sets premium value to true 
+                            this.memberList.updateMembersFile();//updates users profile in data file
                         }
-                        else
+                        else//if not a yes response
                         {
                             System.out.println("You have declined the 'Geek' membership offer.");
                         }
                     }
                     
                     break;
-                case 5:
-                    if (this.currentUser.getPremium())
+                case 5://to check points gained by user
+                    if (this.currentUser.getPremium())//first validates that theyre premium members
                     {
-                        System.out.format("You currently have %d Geek points.\n", this.currentUser.getPoints()); //prints and calculates users premium points
+                        System.out.format("You currently have %d Geek points.\n", this.currentUser.getPoints()); //displays amount of points in data file for user
                     }
-                    else
+                    else//if not a premium member
                     {
                         System.out.println("Upgrade to Geek membership to earn points!");
                     }
                     
                     break;
-                case 6:
+                case 6://to exit the Member interface
                     cont = false;
                     break; 
-                default:
+                default://if user enters invalid input
                     System.out.println("**Enter a valid value! (1-6)**");
                     break;
             }
         }
     }
     /**
-     * Function allows member users to purchase items
-     * @param currentCategory
-     * @param currentItem
-     * @throws IOException 
+     *Purchasing items from the store uses PurchaseItem function to produce: the receipt for user, updates user premium points,
+     *updates purchase history, and updates avaible items
      */
     void PurchaseItem(Category currentCategory, Item currentItem) throws IOException
     {
@@ -301,24 +297,23 @@ public class ElectronicsStoreSystem
                     System.out.println();
                     System.out.println();
                 }
-                else
+                else//if selected item is not in stock
                 {
                     System.out.format("The item %s is not available currently, sorry.\n", currentItem.getName());
                 }
             }
-            else
+            else//if an invalid item input
             {
                 System.out.println("Not an item in the category.\n");
             }
         }
-        else
+        else//if an invalid category input
         {
             System.out.println("Not a category.\n");
         }
     }
     /**
-     * Function writes and formats user's item purchase history
-     * @param purchaseItem
+     * Sends new purchase information to the purchase history file
      */
     public void writePurchaseHistory(Item purchaseItem){
         String timeStamp = new SimpleDateFormat("MM/dd/yyyy KK:mm:ss a").format(new Date());
@@ -326,19 +321,19 @@ public class ElectronicsStoreSystem
         FileUtility.writeContent(".\\txtFiles\\PurchaseHistory.txt", history, true);
     }
     /**
-     * Function reads user's item purchase history
-     * @throws IOException 
+     * Retrieves purchase history of a selected member and displays information. 
+     * Only used by admins. 
      */
     public void readPurchaseHistory() throws IOException {
-        ArrayList<String> history = FileUtility.retrieveContent(".\\txtFiles\\PurchaseHistory.txt"); //creates an arrayListobject history and fills it with data from textfile
+        ArrayList<String> history = FileUtility.retrieveContent(".\\txtFiles\\PurchaseHistory.txt"); //Retrieves the data from the purchase history file
         
-        this.memberList.showMembers(); //call function to list members
+        this.memberList.showMembers(); //calls to show all current members
         
-        String input = FileUtility.stringInput("Enter UserID or Username: "); //prompts admin user to enter member
+        String input = FileUtility.stringInput("Enter UserID or Username: "); //input a user to display information
         
         System.out.println("\n\n- Purchase History - ");
         
-        for(String Current: history) //creates loop to print history array list
+        for(String Current: history) //creates loop to print all of present users history
         {
             String[] arr = Current.split(",");
             

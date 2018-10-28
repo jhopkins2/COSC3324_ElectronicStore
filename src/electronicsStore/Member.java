@@ -1,14 +1,15 @@
 package electronicsStore;
 
 /**
- * Member class is utilized to access, modify, display
- * and instantiate Member objects
+ * The Member class is used to initialize variables of member information
+ * register new members to the list by user input, add points to the profile
+ * and display this information back to the user via "view membership info" option  
  */
 
-public class Member extends User //declaration of member class which inherits from User class
+public class Member extends User 
 {   
     private String fName;
-    private String lName; //private variable meant to store user's last name
+    private String lName; 
     private char mInitial;
     private String email;
     private int points;
@@ -16,7 +17,7 @@ public class Member extends User //declaration of member class which inherits fr
     private String phone;
     private boolean premium;
     
-    //default constructor
+    //Default member constructor
     public Member(){
         super(null, null);
         this.setFirst(null);
@@ -29,7 +30,7 @@ public class Member extends User //declaration of member class which inherits fr
         this.setPremium(false);
  
     }
-    //used by method updateMembers in Memberlist class parameterized constructor
+    //Constructor used by memberList
     public Member(String user, String password, int MemID, String first, char initial, String last,  
             String email, String phone, int points,  boolean premium){
         super(user, password);
@@ -43,7 +44,8 @@ public class Member extends User //declaration of member class which inherits fr
         this.setPremium(premium);
     }
     
-    public void setFirst(String fName){ //mutator function to assign variable stores users first name.
+    //Set variable functions
+    public void setFirst(String fName){
         this.fName = fName;
     }
     public void setLast(String lName){
@@ -58,19 +60,21 @@ public class Member extends User //declaration of member class which inherits fr
     public void setPoints(int points){
         this.points = points;
     }
-    public void setMemID(int memId){ //mutator function assigns member ID with parameter
+    public void setMemID(int memId){ 
         this.memId = memId;
     }
     public void setPhone(String phone) {
     	this.phone = phone;
     }
-     public void setPremium(boolean premium){ //mutator function assigns users premium status
+     public void setPremium(boolean premium){ 
         this.premium = premium;
     }
+     
+    //Get variable functions 
     public String getFirst(){
         return fName;
     }
-    public String getLast(){ //accessor function returns users last name
+    public String getLast(){ 
      return lName;
     }
     public char getInitial(){
@@ -79,7 +83,7 @@ public class Member extends User //declaration of member class which inherits fr
     public String getEmail(){
         return email;
     }
-    public int getPoints(){ //accessor function returns user's points
+    public int getPoints(){ 
         return points;
     }
     public int getMemID(){
@@ -91,19 +95,23 @@ public class Member extends User //declaration of member class which inherits fr
     public boolean getPremium(){
         return premium;
     }
-    /**
-     * function takes users current purchasing points accumulates and stores them.
-     * @param points 
-     */
+   
+    
+    //retrieves a users current point value and adds new points earned by purchases
     public void addPoints(int points){
         int currentPoints = this.getPoints();
         this.setPoints(currentPoints + points);
     }
-    public boolean register(MemberList list){ //function declaration to register new users
-        String username = FileUtility.stringInput("* Enter Username: "); //inputs new username from user
-        if(!list.validateMemberUsername(username))
+    
+    //Function used to register new members to the system and sends it to be written to the data file 
+    public boolean register(MemberList list){ 
+        
+    	//user input of all member information
+    	String username = FileUtility.stringInput("* Enter Username: ");
+    	
+        if(!list.validateMemberUsername(username))//checks that username is not already in the system
         {
-            super.setUsername(username); //assigns user input value to variable
+            super.setUsername(username); 
 
             String password = FileUtility.stringInput("* Enter Password: ");
             super.setPassword(password);
@@ -114,8 +122,8 @@ public class Member extends User //declaration of member class which inherits fr
             String middleInitial = FileUtility.stringInput("* Enter Middle Initial: ");
             this.setInitial(middleInitial.charAt(0));
 
-            String lastName = FileUtility.stringInput("* Enter Last Name: "); //inputs user's last name
-            this.setLast(lastName); //parameterizes user input lastName into mutator function
+            String lastName = FileUtility.stringInput("* Enter Last Name: "); 
+            this.setLast(lastName); 
 
             String emailAddress = FileUtility.stringInput("* Enter E-Mail: ");
             this.setEmail(emailAddress);
@@ -126,13 +134,14 @@ public class Member extends User //declaration of member class which inherits fr
             return true;
         }
         
-        else
+        else //if a username is already in the system
         {
             System.out.println("\n\n**That username is already taken!**\n");
             return false;
         }
     }
-    //function to output information on electronic store members
+    
+    //used to display user information back to the user
     public void showMemberInfo(){
         
         System.out.println("---Member Information---");

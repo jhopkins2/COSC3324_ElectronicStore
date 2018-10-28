@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * This class utilizes the Member class to create a list in which
- * is used to access, modify, display and instantiate Member objects
- * 
+ * MemberList class both retrieves and sets members information to be used by the system
+ * including adding new members to data files, validating member username and passwords, and displaying
+ * user information.
  */
 
 public class MemberList
@@ -14,7 +14,7 @@ public class MemberList
     ArrayList<Member>Memberlist = new ArrayList();
     
    
-    //writes updated list to members.txt
+    //creates new members information layout to be written to the member.txt files
     public void updateMembersFile()throws IOException{
         String contents = "";
         
@@ -32,9 +32,9 @@ public class MemberList
             contents = contents + memberdata;
         }
         
-        FileUtility.writeContent(".\\txtFiles\\members.txt", contents, false);
+        FileUtility.writeContent(".\\txtFiles\\members.txt", contents, false);//writes content to the members file
     }
-     //Check if member exists within Member List
+     //Checks to see if member already exists in the member list
     public Member validateMember(String user, String password){
         for(Member current: this.Memberlist)
         {
@@ -45,7 +45,7 @@ public class MemberList
         }
         return null;
     } 
-    //Check if username exists within Member List
+    //validates if username is present in list
     public boolean validateMemberUsername(String user){
         for(Member current: this.Memberlist)
         {
@@ -57,7 +57,7 @@ public class MemberList
         return false;
     }
    
-    //populates memberlist array with data stored in text file
+    //fills the arrayList with data from the members file to be used by the system
     public void populate() throws IOException {
         ArrayList<String> members = FileUtility.retrieveContent(".\\txtFiles\\members.txt");
         
@@ -89,20 +89,23 @@ public class MemberList
             boolean premium = (ipremium == 1);
             
             Member newMember = new Member(username, password, memID, fName, mInitial, lName, email, phone, points, premium);
-            this.add(newMember);
+            this.add(newMember); //calls to add member to the member list
         }
     }
-  //add member object to memberlist
+  //function to add a member to the memberlist
     public void add(Member m)throws IOException {
         this.Memberlist.add(m);
     }
-    //remove member object from memberlist
+    //function to delete a member from the list
     public void remove(Member e){
         this.Memberlist.remove(e);
     }
     public int length() {
         return this.Memberlist.size();
     }
+    
+    //displays the list of all members in the member list
+    //can only be called by the admins
     public void showMembers(){
         System.out.println();
         System.out.println("---List of Registered Members---\n");

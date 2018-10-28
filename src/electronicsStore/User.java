@@ -1,9 +1,7 @@
 package electronicsStore;
 
 /**
- * The User class is to retrieve username and password input data from 
- * the user and store mutator, accessor and validation functions
- * 
+ * User class is used for validating and storing the username and password of an admin or member
  */
 
 public class User
@@ -11,37 +9,29 @@ public class User
     private String username;
     private String password; 
     
-    /**
-     * functions as parameterized constructor for User Class
-     * @param user
-     * @param password 
-     */
+    //class Constructor 
+    
     public User(String user, String password){
         this.setUsername(user);
         this.setPassword(password);
     }
     
-    public final void setUsername(String username){ //mutator function to set username variable
+    public final void setUsername(String username){ //sets current username
         this.username = username;
     }
-    public final void setPassword(String password){  //mutator function to set password variable
+    public final void setPassword(String password){  //sets current password
         this.password = password;
     }
     
-    public String getUsername(){ //accessor function to return username
+    public String getUsername(){ //Retrieves variable
         return username;
     }
     
-    public String getPassword(){ //accessor function to return password
+    public String getPassword(){ 
         return password;
     }
     
-    /**
-     * This function validates the users credentials
-     * @param user
-     * @param password
-     * @return true or false
-     */
+   //functions used to check the validity of users input to the data files
     public boolean validateUser(String user, String password){
         return (this.getUsername().equalsIgnoreCase(user) && this.getPassword().equals(password));
     }
