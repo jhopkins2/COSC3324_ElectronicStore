@@ -1,0 +1,5 @@
+Vufine Wearable Display,199.00,4
+Samsung Gear S2 Smartwatch,139.99,6
+Fitbit Flex 2,58.25,1
+Fitness Tracker,29.99,11
+Garmin vívofit Fitness Band,56.25,19
