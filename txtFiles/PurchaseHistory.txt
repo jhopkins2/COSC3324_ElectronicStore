@@ -8,3 +8,5 @@
 1,jmoya,[10/28/2018 00:33:58 AM] jmoya - Item: Samsung 50" LED Price: 550.00
 1,jmoya,[10/28/2018 00:44:18 AM] jmoya - Item: TCL 65" 4K Ultra Price: 999.97
 1,jmoya,[10/28/2018 00:44:36 AM] jmoya - Item: TCL 65" 4K Ultra Price: 999.97
+3,jhopkins2,[10/28/2018 09:23:23 AM] jhopkins2 - Item: Nintendo Switch Price: 299.00
+3,jhopkins2,[10/28/2018 09:26:50 AM] jhopkins2 - Item: Toshiba 32" 720p Price: 149.99

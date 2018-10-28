@@ -20,9 +20,14 @@ public class MemberList
         
         for(Member current: this.Memberlist)
         {
-            int premium = (current.getPremium() == true ? 1 : 0);
-            
-            String memberdata = String.format("%s,%s,%d,%s,%s,%s,%s,%s,%d,%b\n",current.getUsername(), current.getPassword(), current.getMemID(), current.getFirst(), current.getInitial(), current.getLast(), current.getEmail(), current.getPhone(),current.getPoints(), premium );
+            int premium = 0;
+            if(current.getPremium() == true){
+                premium = 1;
+            }
+            else{
+                premium = 0;
+            }            
+            String memberdata = String.format("%s,%s,%d,%s,%s,%s,%s,%s,%d,%d\n",current.getUsername(), current.getPassword(), current.getMemID(), current.getFirst(), current.getInitial(), current.getLast(), current.getEmail(), current.getPhone(),current.getPoints(), premium );
             
             contents = contents + memberdata;
         }
@@ -61,7 +66,7 @@ public class MemberList
             
             String[] arr = Current.split(",");
             
-            if (arr.length < 11)
+            if (arr.length < 9)
             {
                 continue;
             }

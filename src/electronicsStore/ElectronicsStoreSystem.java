@@ -114,7 +114,7 @@ public class ElectronicsStoreSystem
         
         while(cont)
         {
-            option = FileUtility.integerInput("\n- Admin Menu -\n1. Add New Item \n2. Read Purchase History\n3. Show Members\n4. Show Admins\n5. Add Admin\n6. Exit\n\n---Please select an option---\n"); //prompt user of switch statement options
+            option = FileUtility.integerInput("\n- Admin Menu -\n1. Add New Item \n2. Read Purchase History\n3. Show Members\n4. Show Admins\n5. Add Admin\n6. Log out\n\n---Please select an option---\n"); //prompt user of switch statement options
             
             switch(option) 
             {
@@ -285,7 +285,7 @@ public class ElectronicsStoreSystem
                     System.out.println(line);
                     System.out.println("Your Purchase Receipt");
                     System.out.println();
-                    System.out.printf("1x %-40s  $%-15.2f  %n", currentItem.getName(), 
+                    System.out.printf("1x %-40s  $%-6.2f  %n", currentItem.getName(), 
                             currentItem.getPrice());
                     System.out.println();                    
                     System.out.println(line);
@@ -294,7 +294,7 @@ public class ElectronicsStoreSystem
                     System.out.printf("Total: %-28s $%.2f%n", " ", total);
                     System.out.println();
                     if(this.currentUser.getPremium()){
-                        System.out.printf("Geek points earned: %-10s  %d($%d)%n", " ", points,
+                        System.out.printf("Geek points earned: %-14s  %d($%d)%n", " ", points,
                                 (int)total);
                     }
                     System.out.println(line);
