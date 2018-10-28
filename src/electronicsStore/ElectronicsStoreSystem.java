@@ -115,7 +115,7 @@ public class ElectronicsStoreSystem
         
         while(cont)
         {
-            option = FileUtility.integerInput("\n- Admin Menu -\n1. Add New Book \n2. Read Purchase History\n3. Show Members\n4. Show Admins\n5. Add Admin\n6. Exit\n\n---Please select an option---\n"); //prompt user of switch statement options
+            option = FileUtility.integerInput("\n- Admin Menu -\n1. Add New Item \n2. Read Purchase History\n3. Show Members\n4. Show Admins\n5. Add Admin\n6. Exit\n\n---Please select an option---\n"); //prompt user of switch statement options
             
             switch(option) 
             {
@@ -179,14 +179,14 @@ public class ElectronicsStoreSystem
      * @throws IOException 
      */
     void MemberInterface() throws IOException {
-        System.out.format("Hello, %s %s %s. Welcome to the TAMUCC electronics store.\n", this.currentUser.getFirst(), this.currentUser.getInitial(), this.currentUser.getLast());
+        System.out.format("Hello, %s %s %s. Welcome to Another Amazon Wannabe electronics store.\n", this.currentUser.getFirst(), this.currentUser.getInitial(), this.currentUser.getLast());
         boolean cont = true;
         
         int option;
 
         while(cont)
         {
-            option = FileUtility.integerInput("\n- Member Menu -\n1. View Catalog\n2. View Membership Info\n3. Buy Item\n4. Upgrade Membership\n5. View Points\n6. Exit\n\n---Please select an option---\n");
+            option = FileUtility.integerInput("\n- Member Menu -\n1. View Catalog\n2. View Membership Info\n3. Buy Item\n4. Upgrade Membership\n5. View Points\n6. Log out\n\n---Please select an option---\n");
             switch(option)
             {
                 case 1: 
@@ -233,7 +233,7 @@ public class ElectronicsStoreSystem
                 case 5:
                     if (this.currentUser.getPremium())
                     {
-                        System.out.format("You currently have %.2f Geek points.\n", this.currentUser.getPoints()); //prints and calculates users premium points
+                        System.out.format("You currently have %d Geek points.\n", this.currentUser.getPoints()); //prints and calculates users premium points
                     }
                     else
                     {
@@ -258,16 +258,21 @@ public class ElectronicsStoreSystem
      */
     void PurchaseItem(Category currentCategory, Item currentItem) throws IOException
     {
+        double tax, total = 0.0;
+        double SALES_TAX = 0.0825;
+        String line = "------------------------"; 
+        int points = 0;
         if (currentCategory != null)
         {
             if (currentItem != null)
             {
                 if (currentItem.getAvailable() == Availability.AVAILABLE) //determines if current item is available
                 {
-                     
+                    tax = currentItem.getPrice() * SALES_TAX;
+                    total = currentItem.getPrice() + tax; 
                     if (this.currentUser.getPremium()) //determines if current user is a premium member
                     {
-                        int points = (int)(currentItem.getPrice()); //calculate premium points
+                        points = (int)(total); //calculate premium points
                         this.currentUser.addPoints(points); //add points to user's accumulated points
                         
                         this.memberList.updateMembers();
@@ -278,7 +283,24 @@ public class ElectronicsStoreSystem
                     
                     this.writePurchaseHistory(currentItem); //calls function to add item purchase to history
                     
-                    System.out.format("Thank you for purchasing %s for $%.2f, %s %s. Hope you enjoy it.\n", currentItem.getName(), currentItem.getPrice(), this.currentUser.getFirst(), this.currentUser.getLast());
+                    System.out.println(line);
+                    System.out.println("Your Purchase Receipt");
+                    System.out.println();
+                    System.out.printf("1x %-40s  $%-15.2f  %n", currentItem.getName(), 
+                            currentItem.getPrice());
+                    System.out.println();                    
+                    System.out.println(line);
+                    System.out.printf("Subtotal: %-25s $%.2f%n", " ", currentItem.getPrice());
+                    System.out.printf("Sale Tax: %-25s $%.2f%n", " ", tax);
+                    System.out.printf("Total: %-28s $%.2f%n", " ", total);
+                    System.out.println();
+                    if(this.currentUser.getPremium()){
+                        System.out.printf("Geek points earned: %-10s  %d($%d)%n", " ", points,
+                                (int)total);
+                    }
+                    System.out.println(line);
+                    System.out.println();
+                    System.out.println();
                 }
                 else
                 {
@@ -302,14 +324,14 @@ public class ElectronicsStoreSystem
     public void writePurchaseHistory(Item purchaseItem){
         String timeStamp = new SimpleDateFormat("MM/dd/yyyy KK:mm:ss a").format(new Date());
         String history = String.format("%s,%s,[%s] %s - Item: %s Price: %.2f\n", this.currentUser.getMemID(), this.currentUser.getUsername(), timeStamp, this.currentUser.getUsername(), purchaseItem.getName(), purchaseItem.getPrice());
-        FileUtility.writeContent("PurchaseHistory.txt", history, true);
+        FileUtility.writeContent(".\\txtFiles\\PurchaseHistory.txt", history, true);
     }
     /**
      * Function reads user's item purchase history
      * @throws IOException 
      */
     public void readPurchaseHistory() throws IOException {
-        ArrayList<String> history = FileUtility.retrieveContent("purchasehistory.txt"); //creates an arrayListobject history and fills it with data from textfile
+        ArrayList<String> history = FileUtility.retrieveContent(".\\txtFiles\\PurchaseHistory.txt"); //creates an arrayListobject history and fills it with data from textfile
         
         this.memberList.showMembers(); //call function to list members
         

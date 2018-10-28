@@ -16,7 +16,7 @@ public class ElectronicsStore
 {
     public static void main(String[] args) throws IOException //main function
     {
-        System.out.println("Welcome to the TAMUCC electronics store."); //prompts user with output text
+        System.out.println("Welcome to Another Amazon Wannabe electronics store."); //prompts user with output text
         
         ElectronicsStoreSystem ES_System = new ElectronicsStoreSystem(); //creates new  ElectronicsStoreSystem object ES_System
         
