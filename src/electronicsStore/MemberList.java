@@ -26,7 +26,7 @@ public class MemberList
             contents = contents + memberdata;
         }
         
-        FileUtility.writeContent("members.txt", contents, false);
+        FileUtility.writeContent(".\\txtFiles\\members.txt", contents, false);
     }
     //Check if member exists within Member List
     public Member validateMember(String user, String password){
@@ -52,7 +52,7 @@ public class MemberList
     }
     //populates memberlist array with data stored in text file
     public void populate() throws IOException {
-        ArrayList<String> members = FileUtility.retrieveContent("members.txt");
+        ArrayList<String> members = FileUtility.retrieveContent(".\\txtFiles\\members.txt");
         
         for(String Current: members)
         {
