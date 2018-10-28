@@ -1,6 +1,5 @@
 package electronicsStore;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -14,21 +13,6 @@ public class MemberList
 {
     ArrayList<Member>Memberlist = new ArrayList();
     
-    //writes updated list to members.txt
-    public void updateMembers() throws IOException {
-        String contents = "";
-        
-        for(Member Current: this.Memberlist)
-        {
-            int premium = (Current.getPremium() == true ? 1 : 0);
-            
-            String memberdata = String.format("%s,%s,%d,%s,%s,%s,%s,%s,%d,%b\n", Current.getUsername(), Current.getPassword(), Current.getMemID(), Current.getFirst(), Current.getInitial(), Current.getLast(), Current.getEmail(), Current.getPhone(),Current.getPoints(), premium );
-            
-            contents = contents + memberdata;
-        }
-        
-        FileUtility.writeContent(".\\txtFiles\\members.txt", contents, false);
-    }
     //Check if member exists within Member List
     public Member validateMember(String user, String password){
         for(Member current: this.Memberlist)
@@ -39,18 +23,25 @@ public class MemberList
             }
         }
         return null;
-    }
-    //Check if username exists within Member List
-    public boolean validateMemberUsername(String user){
+    } 
+
+    //writes updated list to members.txt
+    public void updateMembersFile()throws IOException{
+        String contents = "";
+        
         for(Member current: this.Memberlist)
         {
-            if (current.validateUsername(user))
-            {
-                return true;
-            }
+            int premium = (current.getPremium() == true ? 1 : 0);
+            
+            String memberdata = String.format("%s,%s,%d,%s,%s,%s,%s,%s,%d,%b\n",current.getUsername(), current.getPassword(), current.getMemID(), current.getFirst(), current.getInitial(), current.getLast(), current.getEmail(), current.getPhone(),current.getPoints(), premium );
+            
+            contents = contents + memberdata;
         }
-        return false;
+        
+        FileUtility.writeContent(".\\txtFiles\\members.txt", contents, false);
     }
+    
+   
     //populates memberlist array with data stored in text file
     public void populate() throws IOException {
         ArrayList<String> members = FileUtility.retrieveContent(".\\txtFiles\\members.txt");
@@ -82,16 +73,24 @@ public class MemberList
             
             boolean premium = (ipremium == 1);
             
-            Member newMember = new Member(username, password, fName, lName, mInitial, email, phone, points, memID, premium);
+            Member newMember = new Member(username, password, memID, fName, mInitial, lName, email, phone, points, premium);
             this.add(newMember);
         }
     }
-    //add member object to memberlist
-    public void add(Member e) throws IOException {
-        this.Memberlist.add(e);
-        //FileWriter fileWrite= new FileWriter("members.txt");
-        //fileWrite.write(e);
-        //fileWrite.close();
+  //add member object to memberlist
+    public void add(Member m)throws IOException {
+        this.Memberlist.add(m);
+    }
+    //Check if username exists within Member List
+    public boolean validateMemberUsername(String user){
+        for(Member current: this.Memberlist)
+        {
+            if (current.validateUsername(user))
+            {
+                return true;
+            }
+        }
+        return false;
     }
     //remove member object from memberlist
     public void remove(Member e){
@@ -105,7 +104,7 @@ public class MemberList
         System.out.println("---List of Registered Members---\n");
         for(Member Current: this.Memberlist)
         {
-            System.out.format("%d. %s\n", Current.getMemID(), Current.getUsername());
+            System.out.format("%d %s\n", Current.getMemID(), Current.getUsername());
         }
         System.out.println();
     }

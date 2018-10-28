@@ -81,7 +81,7 @@ public class ElectronicsStoreSystem
                         newMember.setMemID(memid);
 
                         this.memberList.add(newMember);
-                        this.memberList.updateMembers();
+                        this.memberList.updateMembersFile();
 
                         System.out.format("\n\nSuccess! %s %s %s, you are now registered!"
                                         + "\nTo login, use these credentials:\nUsername: %s\nPassword: %s\n\n\n", 
@@ -221,7 +221,7 @@ public class ElectronicsStoreSystem
                         {
                             System.out.println("You have been upgraded to 'Geek' membership, congratulations!"); 
                             this.currentUser.setPremium(true); 
-                            this.memberList.updateMembers();
+                            this.memberList.updateMembersFile();
                         }
                         else
                         {
@@ -275,7 +275,7 @@ public class ElectronicsStoreSystem
                         points = (int)(total); //calculate premium points
                         this.currentUser.addPoints(points); //add points to user's accumulated points
                         
-                        this.memberList.updateMembers();
+                        this.memberList.updateMembersFile();
                     }
                     
                     currentItem.decrementQuantity();

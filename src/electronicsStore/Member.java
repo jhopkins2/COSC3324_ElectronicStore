@@ -30,8 +30,8 @@ public class Member extends User //declaration of member class which inherits fr
  
     }
     //used by method updateMembers in Memberlist class parameterized constructor
-    public Member(String user, String password, String first, String last, char initial, 
-            String email,String phone, int points, int MemID, boolean premium){
+    public Member(String user, String password, int MemID,String first,char initial, String last,  
+            String email,String phone, int points,  boolean premium){
         super(user, password);
         this.setFirst(first);
         this.setLast(last);

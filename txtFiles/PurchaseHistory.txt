@@ -5,3 +5,6 @@
 1,man,[10/27/2018 03:30:46 PM] man - Item: Hidden Figures Price: 20.00
 1,man,[10/27/2018 03:42:30 PM] man - Item: Hidden Figures Price: 20.00
 1,man,[10/27/2018 10:45:53 PM] man - Item: The Guns of August Price: 15.00
+1,jmoya,[10/28/2018 00:33:58 AM] jmoya - Item: Samsung 50" LED Price: 550.00
+1,jmoya,[10/28/2018 00:44:18 AM] jmoya - Item: TCL 65" 4K Ultra Price: 999.97
+1,jmoya,[10/28/2018 00:44:36 AM] jmoya - Item: TCL 65" 4K Ultra Price: 999.97

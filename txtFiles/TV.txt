@@ -1,7 +1,5 @@
-Samsung 50" LED,550.00,3
+Samsung 50" LED,550.00,2
 Vizio 34" Plasma,334.00,6
 Toshiba 32" 720p,149.99,12
 TCL 55" 4K Ultra,379.99,7
-TCL 65" 4K Ultra,999.97,2
-
-
+TCL 65" 4K Ultra,999.97,0

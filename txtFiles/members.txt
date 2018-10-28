@@ -1,1 +1,2 @@
-j,k,1,l,m,n,o,5,0,true
+user1,password,1,jane,h,doe,jdoe,7654321,0,true
+user2,password,2,john,h,smith,jsmith,1234567,0,false
