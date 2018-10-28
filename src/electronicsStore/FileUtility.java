@@ -27,6 +27,7 @@ public class FileUtility
         path = path.replaceAll(" ", "");
         path = path.trim();
         path = path + ".txt";
+        path = ".\\txtFiles\\" + path;
         
         if (upper)
         {

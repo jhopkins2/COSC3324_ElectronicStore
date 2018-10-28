@@ -38,11 +38,11 @@ public class AdminList
             contents = contents + data;
         }
         
-        FileUtility.writeContent("admins.txt", contents, false); //updates content the text file
+        FileUtility.writeContent(".\\txtFiles\\admins.txt", contents, false); //updates content the text file
     }
     //function to print text file "admins.txt" into an array
     public void populate() throws IOException {
-        ArrayList<String> admins = FileUtility.retrieveContent("admins.txt"); //copies text file data into new array object
+        ArrayList<String> admins = FileUtility.retrieveContent(".\\txtFiles\\admins.txt"); //copies text file data into new array object
         
         for(String Current: admins)
         {

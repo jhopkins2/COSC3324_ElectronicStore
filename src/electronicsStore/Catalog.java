@@ -48,7 +48,7 @@ public class Catalog
             {
                 System.out.format(" ----%s-----\n", Current.getName()); //prints categories to user
                 
-                System.out.format("%-40s  %-15s  %-15d  %-10s\n", "Item: ", "Price: ", "Geek Points: ", "Quanitity: "); //formated output
+                System.out.format("%-40s  %-15s  %-10s  %s\n", "Item: ", "Price: ", "Quanitity:", "Availability:"); //formated output
                 Current.showItems();
 
                 System.out.print("\n\n");
@@ -100,7 +100,7 @@ public class Catalog
     }
     //function populates arraylist with "categories.txt" 
     public void populate() throws FileNotFoundException, IOException {
-        ArrayList<String> categoryStrings = FileUtility.retrieveContent("categories.txt"); //fills categoryStrings arrayList
+        ArrayList<String> categoryStrings = FileUtility.retrieveContent(".\\txtFiles\\categories.txt"); //fills categoryStrings arrayList
         
         for(String current: categoryStrings)
         {
