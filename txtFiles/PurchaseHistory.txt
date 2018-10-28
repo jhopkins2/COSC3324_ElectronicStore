@@ -1,0 +1,7 @@
+1,dman,[10/27/2018 02:56:18 PM] dman - Item: 1776 Price: 16.00
+1,man,[10/27/2018 03:01:26 PM] man - Item: 1776 Price: 16.00
+1,man,[10/27/2018 03:29:15 PM] man - Item: 1776 Price: 16.00
+1,man,[10/27/2018 03:29:44 PM] man - Item: World War 2 Price: 16.50
+1,man,[10/27/2018 03:30:46 PM] man - Item: Hidden Figures Price: 20.00
+1,man,[10/27/2018 03:42:30 PM] man - Item: Hidden Figures Price: 20.00
+1,man,[10/27/2018 10:45:53 PM] man - Item: The Guns of August Price: 15.00
