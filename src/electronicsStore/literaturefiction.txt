@@ -1,5 +1,0 @@
-Ender's game,12.00,10
-Brave New World,12.00,10
-Dune,14.00,9
-Fahrenheit 451,13.00,10
-Starship Troopers,14.00,10
