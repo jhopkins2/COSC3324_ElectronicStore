@@ -1,0 +1,5 @@
+Samsung Galaxy J7 Neo,138.22,15
+Samsung Galaxy J2 Prime,99.96,5
+Huawei Mate SE Factory Unlocked 5.93”,229.99,2
+Moto X (4th Generation),249.99,17
+Apple iPhone 6 64GB,188.99,12
