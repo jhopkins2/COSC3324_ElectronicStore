@@ -136,6 +136,6 @@ public class Member extends User //declaration of member class which inherits fr
     public void showMemberInfo(){
         
         System.out.println("---Member Information---");
-        System.out.format(" %-20s %s %s %s\n %-20s %d\n %-20s %s\n %-20s %d\n %-20s %b\n","User:", this.getFirst(),  this.getInitial(),  this.getLast(), "Member ID:", this.getMemID(), "E-mail Address:", this.getEmail(),"Phone Number: ",this.getPhone(), "Premium Member:", this.getPremium());
+        System.out.format(" %-20s %s %s %s\n %-20s %d\n %-20s %s\n %-20s %s\n %-20s %b\n","User:", this.getFirst(),  this.getInitial(),  this.getLast(), "Member ID:", this.getMemID(), "E-mail Address:", this.getEmail(),"Phone Number: ",this.getPhone(), "Premium Member:", this.getPremium());
     }
 }
