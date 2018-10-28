@@ -1,0 +1,6 @@
+Romeo and Juliet,14.00,7
+Mere Christianity,12.00,10
+Screwtape Letters,16.00,10
+Holy Bible,13.00,10
+Under the Banner of Heaven,13.00,10
+Love Story,7.99,14

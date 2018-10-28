@@ -1,0 +1,5 @@
+Red and Blue,13.00,10
+Art & Fear,14.50,10
+The Art Spirit,12.50,10
+How Pictures Work,15.00,10
+Imaginative Realism,9.00,10

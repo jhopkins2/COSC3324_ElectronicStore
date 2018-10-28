@@ -1,0 +1,8 @@
+1776,16.00,3
+Hidden Figures,20.00,10
+The Guns of August,15.00,8
+Bury My Heart At Wounded Knee,15.00,10
+A Distant Mirror,13.00,10
+The Lamb that got Away,12.34,9
+World War 2,16.50,18
+Give Me Liberty!: An American History,5.00,15

@@ -1,5 +1,6 @@
 package electronicsStore;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -88,6 +89,9 @@ public class MemberList
     //add member object to memberlist
     public void add(Member e) throws IOException {
         this.Memberlist.add(e);
+        //FileWriter fileWrite= new FileWriter("members.txt");
+        //fileWrite.write(e);
+        //fileWrite.close();
     }
     //remove member object from memberlist
     public void remove(Member e){
