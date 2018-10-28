@@ -11,10 +11,10 @@ public class Member extends User //declaration of member class which inherits fr
     private String lName; //private variable meant to store user's last name
     private char mInitial;
     private String email;
-    private boolean premium;
     private int points;
     private int memId;
     private String phone;
+    private boolean premium;
     
     //default constructor
     public Member(){
@@ -30,8 +30,8 @@ public class Member extends User //declaration of member class which inherits fr
  
     }
     //used by method updateMembers in Memberlist class parameterized constructor
-    public Member(String user, String password, int MemID,String first,char initial, String last,  
-            String email,String phone, int points,  boolean premium){
+    public Member(String user, String password, int MemID, String first, char initial, String last,  
+            String email, String phone, int points,  boolean premium){
         super(user, password);
         this.setFirst(first);
         this.setLast(last);

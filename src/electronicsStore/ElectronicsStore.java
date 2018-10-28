@@ -3,24 +3,24 @@ package electronicsStore;
 import java.io.IOException;
 
 /**
-* TAMUCC electronics store program implements an application that allows users to 
-* register and purchase electronics, as well as allows registered administrators to track the system.
+* The TAMUCC Electronics Store program allows users login, register, and purchase various electronics, 
+* as well as allows registered administrators to view member details such as order history and register new admins to the system.
 *
 * @author  Jacob Hopkins, Jonie Moya, Hailey Chapman
 * @version 1.0
 * @since   2018-10/21
 */
 
-//Electronic class utilizes the classes within the package to run the program
+//ElectronicStore class implements the corresponding classes to run the store program.
 public class ElectronicsStore
 {
-    public static void main(String[] args) throws IOException //main function
+    public static void main(String[] args) throws IOException 
     {
-        System.out.println("Welcome to Another Amazon Wannabe electronics store."); //prompts user with output text
+        System.out.println("Welcome to Another Amazon Wannabe electronics store."); //welcome message to user
         
-        ElectronicsStoreSystem ES_System = new ElectronicsStoreSystem(); //creates new  ElectronicsStoreSystem object ES_System
+        ElectronicsStoreSystem ES_System = new ElectronicsStoreSystem(); //new ElectronicsStoreSystem object named ES_System
         
-        ES_System.AuthenticateUser(); //calls ES_System function
+        ES_System.AuthenticateUser(); //calls ElectronicStoreSystem function
         
     }
 }

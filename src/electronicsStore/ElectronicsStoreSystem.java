@@ -7,32 +7,31 @@ import java.util.Date;
 import java.util.Scanner;
 
 /**
- * ElectronicsStoreSystem class implements other classes in electronics store package
- * to create a user interface for the TAMUCC electronics store program
+ * ElectronicsStoreSystem class uses corresponding classes to create the interface of the
+ * Electronics store.
  * 
  */
 
 public class ElectronicsStoreSystem 
 {
-    private final AdminList adminList = new AdminList(); //creates new object from the AdminList class.
-    private final MemberList memberList = new MemberList();
+    private final AdminList adminList = new AdminList(); //new adminList from adminList class
+    private final MemberList memberList = new MemberList();//new memberList from memberList class
     private Catalog itemCatalog = new Catalog();
     
     private Member currentUser = null; //declares new private variable and initializes it as empty
     private Admin currentAdmin = null;
-
-    public ElectronicsStoreSystem() throws IOException { //Class constructor
+    
+    //Class constructor
+    public ElectronicsStoreSystem() throws IOException { 
         this.memberList.populate();
         this.adminList.populate();
         this.itemCatalog.populate();
     }
     
-   /**
-   * Inputs user data and authorizes them for the program.
-   * @throws IOException
-   */
+   //Authorizes users input for program 
+    
     void AuthenticateUser() throws IOException {
-        String user; //declares user input variable
+        String user; //user input variable
         String password;
 
         boolean cont = true; //sets condition for switch statement
@@ -42,49 +41,49 @@ public class ElectronicsStoreSystem
         {
             System.out.println("\n- Main Menu -");
             System.out.println("-----------------------------------------------------");
-            option = FileUtility.integerInput("1. Show Catalog\n2. Login\n3. Register\n4. Exit\n"); //prompts and inputs data from user
+            option = FileUtility.integerInput("1. Show Catalog\n2. Login\n3. Register\n4. Exit\n"); //user input options for case switch 
             System.out.println("-----------------------------------------------------");
             switch(option)
             {
-                case 1:
-                    itemCatalog.showCategories(); //calls itemCatalog object function  displays item selection
+                case 1://Show catalog
+                    itemCatalog.showCategories(); //calls itemCatalog object function and displays item selection
                     break;
-                case 2: 
-                    user = FileUtility.stringInput("\n* Enter Member Username: "); //inputs credentials from user
-                    password = FileUtility.stringInput("\n* Enter Member Password: ");
+                case 2: //Log-in
+                    user = FileUtility.stringInput("\n* Enter Member Username: "); //user input for username
+                    password = FileUtility.stringInput("\n* Enter Member Password: ");//input for password
 
-                    this.currentUser = this.memberList.validateMember(user, password); //calls function to validate user credentials
-                    if (this.currentUser != null)
+                    this.currentUser = this.memberList.validateMember(user, password); //calls function to validate user credentials as present in member data files
+                    if (this.currentUser != null)//if present 
                     {
-                        this.MemberInterface(); //redirects to different after user credentials have been validated
+                        this.MemberInterface(); //redirects to different interface after verified
                     }
-                    else
+                    else  //checks if user is an admin
                     {
-                        this.currentAdmin = this.adminList.validateAdmin(user, password); 
+                        this.currentAdmin = this.adminList.validateAdmin(user, password); //calls function to validate user as present in admin data files
                         
-                        if (this.currentAdmin != null) //validates that variable is not empty
+                        if (this.currentAdmin != null) //if present
                         {
-                            this.AdminInterface(); //redirects to new function for administrator
+                            this.AdminInterface(); //redirects to admin interface
                         }
-                        else
+                        else //if neither user or admin
                         {
-                            System.out.println("\n\n**Those login credentials were not valid.**\n"); //prompts user to re-enter correct credentials
+                            System.out.println("\n\n**You have entered the wrong username or password.**\n"); //prompts user to re-enter correct log-in information
                         }
                     }
                     
                     break;
-                case 3:
+                case 3://Register new member
                     Member newMember = new Member(); //creates new object from Member Class to register new user
                     if (newMember.register(this.memberList))
                     {
                         int memid = this.memberList.length() + 1; 
                         newMember.setMemID(memid);
 
-                        this.memberList.add(newMember);
-                        this.memberList.updateMembersFile();
+                        this.memberList.add(newMember); //adds new member to memberList
+                        this.memberList.updateMembersFile(); //adds member to member data file
 
                         System.out.format("\n\nSuccess! %s %s %s, you are now registered!"
-                                        + "\nTo login, use these credentials:\nUsername: %s\nPassword: %s\n\n\n", 
+                                        + "\nTo login, use:\nUsername: %s\nPassword: %s\n\n\n", 
                                         newMember.getFirst(), newMember.getInitial(), newMember.getLast(), 
                                         newMember.getUsername(), newMember.getPassword());
                         
@@ -94,10 +93,10 @@ public class ElectronicsStoreSystem
                     { 
                         break;
                     }
-                case 4:
+                case 4: //exit
                     cont = false;
                     break; 
-                default:
+                default: //if user entered invalid input 
                     System.out.println("**Enter a valid value! (1-4)**");
                     break;
             }
@@ -109,7 +108,7 @@ public class ElectronicsStoreSystem
      * @throws IOException 
      */
     void AdminInterface() throws IOException {
-        System.out.println("\n\n\n*--Welcome Back Administrator.--*");
+        System.out.println("\n\n\n*--Welcome Administrator.--*");
         boolean cont = true;
         int option;
         
@@ -156,7 +155,7 @@ public class ElectronicsStoreSystem
                         this.adminList.add(newAdmin); //add newAdmin to adminList array
                         this.adminList.UpdateAdminFile();
 
-                        System.out.format("\n\nCongratulations, you've registered a new Admin successfully.\nTo login, use these credentials:\nUsername: %s\nPassword: %s\n", newAdmin.getUsername(), newAdmin.getPassword());
+                        System.out.format("\n\nCongratulations, you've successfully registered an Admin! \nTo login, use:\nUsername: %s\nPassword: %s\n", newAdmin.getUsername(), newAdmin.getPassword());
                         
                         break;
                     }
@@ -216,7 +215,7 @@ public class ElectronicsStoreSystem
                     }
                     else
                     {
-                        String input = FileUtility.stringInput("Are you sure you want to upgrade for $2.99 a month: [y/n]"); //user inputs string variable
+                        String input = FileUtility.stringInput("Are you sure you want to upgrade to 'Geek'?: [y/n]"); //user inputs string variable
                         if (input.equalsIgnoreCase("y") || input.equalsIgnoreCase("yes"))
                         {
                             System.out.println("You have been upgraded to 'Geek' membership, congratulations!"); 
@@ -237,7 +236,7 @@ public class ElectronicsStoreSystem
                     }
                     else
                     {
-                        System.out.println("Upgrade to Geek membership to get points.");
+                        System.out.println("Upgrade to Geek membership to earn points!");
                     }
                     
                     break;

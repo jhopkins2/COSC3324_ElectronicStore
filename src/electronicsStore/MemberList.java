@@ -13,18 +13,7 @@ public class MemberList
 {
     ArrayList<Member>Memberlist = new ArrayList();
     
-    //Check if member exists within Member List
-    public Member validateMember(String user, String password){
-        for(Member current: this.Memberlist)
-        {
-            if (current.validateUser(user, password))
-            {
-                return current;
-            }
-        }
-        return null;
-    } 
-
+   
     //writes updated list to members.txt
     public void updateMembersFile()throws IOException{
         String contents = "";
@@ -40,7 +29,28 @@ public class MemberList
         
         FileUtility.writeContent(".\\txtFiles\\members.txt", contents, false);
     }
-    
+     //Check if member exists within Member List
+    public Member validateMember(String user, String password){
+        for(Member current: this.Memberlist)
+        {
+            if (current.validateUser(user, password))
+            {
+                return current;
+            }
+        }
+        return null;
+    } 
+    //Check if username exists within Member List
+    public boolean validateMemberUsername(String user){
+        for(Member current: this.Memberlist)
+        {
+            if (current.validateUsername(user))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
    
     //populates memberlist array with data stored in text file
     public void populate() throws IOException {
@@ -80,17 +90,6 @@ public class MemberList
   //add member object to memberlist
     public void add(Member m)throws IOException {
         this.Memberlist.add(m);
-    }
-    //Check if username exists within Member List
-    public boolean validateMemberUsername(String user){
-        for(Member current: this.Memberlist)
-        {
-            if (current.validateUsername(user))
-            {
-                return true;
-            }
-        }
-        return false;
     }
     //remove member object from memberlist
     public void remove(Member e){
