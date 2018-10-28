@@ -1,0 +1,5 @@
+Canon EOS Rebel T6,330.45,9
+Nikon D850 FX-Format Digital,3296.95,1
+Canon EOS 7D Mark II Digital SLR Camera,1059.95,13
+Nikon D3400 Digital SLR Camera,379.00,2
+Canon G7X Mark II Digital Camera,539.00,4
