@@ -1,23 +1,17 @@
 package electronicsStore;
 
 /**
- * Item class is utilized to create, modify, access and 
- * display item data
+ * Item class is used to hold the item data from the item's text files 
  * 
  */
 
 public class Item
 {
-    private String name;
-    private double price; //declares private price variable
-    private int quantity;
-    private Availability available; 
+    private String name;//name of the item
+    private double price; //price of the item
+    private int quantity; //the amount in stock of the item
+    private Availability available; //if the item is in stock then it is available for purchase
     
-    public Item(){ //default constructor
-        this.setName(null);
-        this.setPrice(0);
-        this.setQuantity(0);
-    }
     public Item(String name, double price, int quantity){ //parameterized constructor
         this.setName(name); //uses mutator function to set parameter
         this.setPrice(price);
@@ -25,7 +19,7 @@ public class Item
     }
     
     public void setName(String name){ //mutator function for item name
-        if (name != null && !name.isEmpty()) //validates setName parameter 
+        if (name != null && !name.isEmpty()) //validating the given parameters
         {
             this.name = name;
         }
@@ -43,26 +37,26 @@ public class Item
             
             if (this.getQuantity() > 0) //validates quantity
             {
-                this.setAvailability(Availability.AVAILABLE); //sets available variable
+                this.setAvailability(Availability.AVAILABLE); //sets available variable based on item quantity
             }
             else
             {
-                this.setAvailability(Availability.UNAVAILABLE); //sets available variable
+                this.setAvailability(Availability.UNAVAILABLE); //sets available variable based on item quantity
             }
         }
     }
-    public void setAvailability(Availability status){ //mutator function 
-        this.available = status;
+    public void setAvailability(Availability status){ // Availability mutator function 
+        this.available = status;//assign status to item
     }
     
-    public String getName(){
-        return this.name;
+    public String getName(){//Name accessor function
+        return this.name;//return name variable
     }
-    public double getPrice(){ //accessor function
+    public double getPrice(){ //Price accessor function
         return this.price; //return price variable
     }
-    public int getQuantity(){
-        return this.quantity;
+    public int getQuantity(){//Quantity accessor function
+        return this.quantity;//return quantity variable
     }
     public Availability getAvailable(){ //accessor function returns available variable 
         return this.available;
@@ -70,31 +64,26 @@ public class Item
     public String getAvailableString(){ //accessor function returns string value 
         if (this.getAvailable() == Availability.AVAILABLE) // condition determines item availability
         {
-            return "Available";
+            return "Available"; //if available return available
         }
         
         return "Unavailable";
     }
     
-    // function increments item quantities
-    public void incrementQuantity(){
-        int currentQuantity = this.getQuantity();
-        this.setQuantity(currentQuantity + 1); //increments quantity by using mutator function
-    }
     //function decrements item quantities
     public void decrementQuantity(){
-        int currentQuantity = this.getQuantity(); //sets currentQuantity
-        if (currentQuantity > 0) //validates quantity is greater than 0
+        int currentQuantity = this.getQuantity(); //get currentQuantity
+        if (currentQuantity > 0) //validate if the quantity is greater than 0
         {
-            this.setQuantity(currentQuantity - 1); //decrements quantity
+            this.setQuantity(currentQuantity - 1); //decrease quantity by 1
         }
     }    
-    //function to return formatted item selection
+    //item toString method
     @Override
-    public final String toString(){
+    public final String toString(){//converts the data of the item into a readable string
         String text = String.format("%-40s  $%-15.2f  %-10d %-10s", 
                         this.getName(),  this.getPrice(), this.getQuantity(),  
                         this.getAvailableString());
-        return text;
+        return text;//return that string for display
     }
 }

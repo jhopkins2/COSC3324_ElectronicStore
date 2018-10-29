@@ -1,1 +1,2 @@
 2,user2,[10/28/2018 06:11:47 PM] user2 - Item: Fitness Tracker Price: 29.99 Quantity: 3
+1,user1,[10/28/2018 09:09:15 PM] user1 - Item: iXCC 5 Port Car Charger Price: 15.99 Quantity: 1

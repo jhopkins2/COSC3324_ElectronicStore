@@ -1,3 +1,3 @@
-user1,password,1,jane,h,doe,jdoe,7654321,37,1
+user1,password,1,jane,h,doe,jdoe,7654321,54,1
 user2,password,2,john,h,smith,jsmith,1234567,0,0
 jhopkins2,man,3,Jacob,D,Hopkins,hoppyj123@gmail.com,3612784590,485,1

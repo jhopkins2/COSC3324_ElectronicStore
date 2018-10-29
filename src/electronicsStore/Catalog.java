@@ -5,46 +5,45 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Catalog class utilizes the Category class to create a list in which
- * is used to access, modify, display and instantiate Category objects
+ * Catalog class uses the Category class to create a data structure for the categories of the store
  * 
  */
 
 public class Catalog
 {
-    private ArrayList<Category> categories = new ArrayList(); //new ArrayList object created
+    private ArrayList<Category> categories = new ArrayList(); //new ArrayList object of category type created
     
-    public Category getCategory(int num){
-        num = num - 1; //decrements parameter value
+    public Category getCategory(int num){//accessor method of obtaining the categories for the ArrayList
+        num = num - 1; //decrement the parameter value by one
         
-        if ((num < 0) || (num > this.categories.size())) //validate function parameter
+        if ((num < 0) || (num > this.categories.size())) //validate the parameter
         {
-            return null;
+            return null;//if one condition is true return nothing
         }
         
-        return this.categories.get(num); //returns category
+        return this.categories.get(num); //returns category if condition is met
     }
-    //this function take user input as a parameter and uses it to select a category
+    //accessor function takes user input as a parameter. A specific category will be found based on the parameter provided
     public Category getCategory(String name){
-        for(Category current: this.categories) //loop until categories array list ends
+        for(Category current: this.categories) //loop through the categories array list
         {
-            if (current.getName().equalsIgnoreCase(name) || current.getPath().equalsIgnoreCase(name)) //validates parameter input disregarding letter cases
+            if (current.getName().equalsIgnoreCase(name) || current.getPath().equalsIgnoreCase(name))//compare the parameters name in the array list to find category
             {
-                return current;
+                return current;//return category if found
             }
         }
         
-        return null;
+        return null; //return nothing if not found
     }
-    //function returns array list categories
+    //function will return the contents of the catergories array list
     public ArrayList<Category> getCategories(){
-        return (ArrayList<Category>) this.categories.clone(); //returns copy of arraylist categories
+        return (ArrayList<Category>) this.categories.clone(); //return a copy of arraylist
     }
-    //this function outputs the list of categories to user
-    public void showCategories(boolean showItems){   
-        if (showItems)
+    //this function displayss the list of categories to user
+    public void showCategories(boolean showItems){ //the parameter is used to determined to show the categories item list or not  
+        if (showItems)//if true display categories and items
         {
-            for(Category Current: this.categories)
+            for(Category Current: this.categories)//loop through the array list
             {
                 System.out.format(" ----%s-----\n", Current.getName()); //prints categories to user
                 

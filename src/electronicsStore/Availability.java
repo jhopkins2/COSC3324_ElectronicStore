@@ -2,18 +2,18 @@ package electronicsStore;
 
 /**
  * This enumeration is utilized to represent the availability 
- * of a given item within a Catalog
+ * of a given item within the Catalog
  * 
  */
 
 public enum Availability
 {
-    AVAILABLE(1), UNAVAILABLE(2); //enum type predefined constants for book status
+    AVAILABLE(1), UNAVAILABLE(2); //predefined enumerated constants for item availability
     
-    private int status; //private variable declaration
+    private int status; //private variable declaration of item status
     
-    Availability(int status){ //assigns parameter to status variable
-        this.status = status;
+    Availability(int status){ //Class constructor parameter status
+        this.status = status; //assign status to private variable
     }
     
     public int getStatus(){ //accessor function to return status 
