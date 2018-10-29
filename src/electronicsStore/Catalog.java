@@ -47,24 +47,24 @@ public class Catalog
             {
                 System.out.format(" ----%s-----\n", Current.getName()); //prints categories to user
                 
-                System.out.format("%-40s  %-15s  %-10s  %s\n", "Item: ", "Price: ", "Quanitity:", "Availability:"); //formated output
-                Current.showItems();
+                System.out.format("%-40s  %-15s  %-10s  %s\n", "Item: ", "Price: ", "Quanitity:", "Availability:"); //formated item header
+                Current.showItems();//show category items
 
-                System.out.print("\n\n");
+                System.out.print("\n\n");//print spaces
             }
         }
-        else
+        else//if no items are to be displayed
         {
             for(Category Current: this.categories)
             {
-                System.out.format("%s\n", Current.getName());
+                System.out.format("%s\n", Current.getName());//loop through list and display category names
             }
         }
     }
-    public void showCategories(){
+    public void showCategories(){//no parameter version of previous method
         showCategories(true);
     }
-    //function inputs category with user entered string parameter
+    //method finds category for user. parameter is a string prompt
     public Category inputCategory(String prompt){
         Category inputCat = null;
         String cat;
@@ -76,9 +76,11 @@ public class Catalog
         
         return inputCat;
     }
+    //same method as previous one with no parameters
     public Category inputCategory(){ //prompts user for input
         return inputCategory("* Enter the category for the item you are looking for: ");
     }
+    //method will find an item within the specified category
     public Item inputItem(Category cat){
         Item inputItem = null; 
         String item;
@@ -86,7 +88,7 @@ public class Catalog
         {
             item = FileUtility.stringInput("\nEnter the item name: "); //prompts user to enter item variable input
             
-            inputItem = cat.getItem(item); //assigns user input to Item inputItem variable
+            inputItem = cat.getItem(item); //finds user item and assigns to Item inputItem variable
         }
         
         return inputItem; //returns Item name as inputName variable
@@ -97,20 +99,21 @@ public class Catalog
             this.categories.add(cat); //adds validated parameter to categories arrayList object
         }
     }
-    //function populates arraylist with "categories.txt" 
+    //method will populate the arraylist with categories from "categories.txt" 
     public void populate() throws FileNotFoundException, IOException {
-        ArrayList<String> categoryStrings = FileUtility.retrieveContent(".\\txtFiles\\categories.txt"); //fills categoryStrings arrayList
+        //reads the strings from the file "categories.txt" and places them within an arraylist
+        ArrayList<String> categoryStrings = FileUtility.retrieveContent(".\\txtFiles\\categories.txt");
         
-        for(String current: categoryStrings)
+        for(String current: categoryStrings)//loop through the array list
         {
-            String fpath = FileUtility.nameToFile(current, false);
+            String fpath = FileUtility.nameToFile(current, false);//find the categories file path
             
-            Category cat = new Category(current, fpath);
+            Category cat = new Category(current, fpath);//create a new category object with current name and found file path
             
-            this.addCategory(cat);
+            this.addCategory(cat);//add category to the array list
         }
     }
-    //function prints items to the user from selected category in parameter
+    //methods prints items to the user from selected category in parameter
     public void showItems(Category cat){ 
         for(Item Current: cat.getItems()) //loops for each item in category
         {
