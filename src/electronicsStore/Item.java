@@ -88,19 +88,7 @@ public class Item
         {
             this.setQuantity(currentQuantity - 1); //decrements quantity
         }
-    }
-    // allows administrators to enter new item information
-    public void registerNewItem(){
-        String newItem = FileUtility.stringInput("* Enter Item Name: "); //prompt user to enter item name
-        this.setName(newItem); //sets user input with mutator function
-        
-        double newPrice = FileUtility.doubleInput("* Enter Item Price: ");
-        this.setPrice(newPrice);
-        
-        int newQuantity = FileUtility.integerInput("* Enter Item Quantity: "); //prompts user to enter item quantity
-        this.setQuantity(newQuantity); //sets user input with mutator function
-        System.out.println("---Category Selection---");
-    }
+    }    
     //function to return formatted item selection
     @Override
     public final String toString(){

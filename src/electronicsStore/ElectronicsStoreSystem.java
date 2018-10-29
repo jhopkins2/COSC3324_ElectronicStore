@@ -113,41 +113,20 @@ public class ElectronicsStoreSystem
         
         while(cont)
         {
-            option = FileUtility.integerInput("\n- Admin Menu -\n1. Add New Item \n2. Read Purchase History\n3. Show Members\n4. Show Admins\n5. Add Admin\n6. Log out\n\n---Please select an option---\n"); //admins menu options
+            option = FileUtility.integerInput("\n- Admin Menu -\n1. Read Purchase History\n2. Show Members\n3. Show Admins\n4. Add Admin\n5. Log out\n\n---Please select an option---\n"); //admins menu options
             
             switch(option) 
             {
-                case 1:// registering a new item to the system
-                    Item newItem = new Item(); //creates the new item 
-                    newItem.registerNewItem(); //registers that a new item will be added
-                    
-                    this.itemCatalog.showCategories(false);
-                    
-                    Category placeCat = this.itemCatalog.inputCategory("* Enter the category in which you wish to place the item: "); //prompt where to places the new item
-                    
-                    if (placeCat != null)//if category is valid
-                    {
-                        placeCat.addItem(newItem); //calls to add new item 
-                        placeCat.updateDatabase(); //calls to update the database of items
-                        
-                         System.out.format("\n\nYou've added a new Item successfully.\nItem Information:\nName: %s\nPrice: %s\n", newItem.getName(), newItem.getPrice());
-                    }
-                    else //if they entered an invalid category
-                    {
-                        System.out.println("Invalid Category");
-                    }
-                    
-                    break;
-                case 2: //calls function to read a users purchase history
+                case 1: //calls function to read a users purchase history
                     this.readPurchaseHistory();
                     break;
-                case 3://calls function to show all currently registered member users
+                case 2://calls function to show all currently registered member users
                     this.memberList.showMembers(); 
                     break;
-                case 4://calls function to show all currently registered admin users
+                case 3://calls function to show all currently registered admin users
                     this.adminList.showAdmins(); 
                     break;
-                case 5://to register a new admin to the system
+                case 4://to register a new admin to the system
                     Admin newAdmin = new Admin(); //create new admin object
                     if (newAdmin.register(this.adminList)) //call to register the new admin to the array
                     {                    
@@ -162,11 +141,11 @@ public class ElectronicsStoreSystem
                     {
                         break;
                     }
-                case 6://for exit
+                case 5://for logging out
                     cont = false;
                     break;  
                 default://if entered an invalid input
-                    System.out.println("**Enter a valid value! (1-6)**");
+                    System.out.println("**Enter a valid value! (1-5)**");
                     break;
             }
         }
@@ -249,11 +228,11 @@ public class ElectronicsStoreSystem
     }
     /**
      *Purchasing items from the store uses PurchaseItem function to produce: the receipt for user, updates user premium points,
-     *updates purchase history, and updates avaible items
+     *updates purchase history, and updates available items
      */
     void PurchaseItem(Category currentCategory, Item currentItem) throws IOException
     {
-        double tax, total = 0.0;
+        double tax, total, subtotal = 0.0;
         double SALES_TAX = 0.0825;
         String line = "------------------------"; 
         int points = 0;
@@ -263,39 +242,49 @@ public class ElectronicsStoreSystem
             {
                 if (currentItem.getAvailable() == Availability.AVAILABLE) //determines if current item is available
                 {
-                    tax = currentItem.getPrice() * SALES_TAX;
-                    total = currentItem.getPrice() + tax; 
-                    if (this.currentUser.getPremium()) //determines if current user is a premium member
-                    {
-                        points = (int)(total); //calculate premium points
-                        this.currentUser.addPoints(points); //add points to user's accumulated points
+                    System.out.println();
+                    System.out.println();
+                    int quantity = FileUtility.integerInput("Enter the quantity you want to purchase: ");
+                    if(quantity >= 1 && quantity <= currentItem.getQuantity()){
+                        subtotal = currentItem.getPrice() * (double)quantity;
+                        tax = currentItem.getPrice() * SALES_TAX * (double)quantity;
+                        total = subtotal + tax; 
+                        if (this.currentUser.getPremium()) //determines if current user is a premium member
+                        {
+                            points = (int)(total); //calculate premium points
+                            this.currentUser.addPoints(points); //add points to user's accumulated points
                         
-                        this.memberList.updateMembersFile();
-                    }
+                            this.memberList.updateMembersFile();
+                        }
+                        for(int i = 0; i < quantity; i++){
+                            currentItem.decrementQuantity();
+                        }                        
+                        currentCategory.updateDatabase();
                     
-                    currentItem.decrementQuantity();
-                    currentCategory.updateDatabase();
+                        this.writePurchaseHistory(currentItem, quantity); //calls function to add item purchase to history
                     
-                    this.writePurchaseHistory(currentItem); //calls function to add item purchase to history
-                    
-                    System.out.println(line);
-                    System.out.println("Your Purchase Receipt");
-                    System.out.println();
-                    System.out.printf("1x %-40s  $%-6.2f  %n", currentItem.getName(), 
+                        System.out.println(line);
+                        System.out.println("Your Purchase Receipt");
+                        System.out.println();
+                        System.out.printf("%dx %-40s  $%-6.2f  %n", quantity, currentItem.getName(), 
                             currentItem.getPrice());
-                    System.out.println();                    
-                    System.out.println(line);
-                    System.out.printf("Subtotal: %-25s $%.2f%n", " ", currentItem.getPrice());
-                    System.out.printf("Sale Tax: %-25s $%.2f%n", " ", tax);
-                    System.out.printf("Total: %-28s $%.2f%n", " ", total);
-                    System.out.println();
-                    if(this.currentUser.getPremium()){
-                        System.out.printf("Geek points earned: %-14s  %d($%d)%n", " ", points,
+                        System.out.println();                    
+                        System.out.println(line);
+                        System.out.printf("Subtotal: %-25s $%.2f%n", " ", subtotal);
+                        System.out.printf("Sale Tax: %-25s $%.2f%n", " ", tax);
+                        System.out.printf("Total: %-28s $%.2f%n", " ", total);
+                        System.out.println();
+                        if(this.currentUser.getPremium()){
+                            System.out.printf("Geek points earned: %-14s  %d($%d)%n", " ", points,
                                 (int)total);
+                        }
+                        System.out.println(line);
+                        System.out.println();
+                        System.out.println();
                     }
-                    System.out.println(line);
-                    System.out.println();
-                    System.out.println();
+                    else{
+                        System.out.format("You entered an invalid amount: %d\n", quantity);
+                    }
                 }
                 else//if selected item is not in stock
                 {
@@ -315,9 +304,10 @@ public class ElectronicsStoreSystem
     /**
      * Sends new purchase information to the purchase history file
      */
-    public void writePurchaseHistory(Item purchaseItem){
+    public void writePurchaseHistory(Item purchaseItem, int q){
         String timeStamp = new SimpleDateFormat("MM/dd/yyyy KK:mm:ss a").format(new Date());
-        String history = String.format("%s,%s,[%s] %s - Item: %s Price: %.2f\n", this.currentUser.getMemID(), this.currentUser.getUsername(), timeStamp, this.currentUser.getUsername(), purchaseItem.getName(), purchaseItem.getPrice());
+        String history = String.format("%s,%s,[%s] %s - Item: %s Price: %.2f Quantity: %d\n", this.currentUser.getMemID(), this.currentUser.getUsername(), timeStamp,
+                this.currentUser.getUsername(), purchaseItem.getName(), purchaseItem.getPrice(), q);
         FileUtility.writeContent(".\\txtFiles\\PurchaseHistory.txt", history, true);
     }
     /**
@@ -329,7 +319,7 @@ public class ElectronicsStoreSystem
         
         this.memberList.showMembers(); //calls to show all current members
         
-        String input = FileUtility.stringInput("Enter UserID or Username: "); //input a user to display information
+        String input = FileUtility.stringInput("Enter UserID or Username to view their purchase history: "); //input a user to display information
         
         System.out.println("\n\n- Purchase History - ");
         
