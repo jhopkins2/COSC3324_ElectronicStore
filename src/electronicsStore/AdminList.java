@@ -4,32 +4,36 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * This class functions to store, validate, add and print
- * electronics store administrator data
+ * AdminList class has the ability to retrieve data from admin file, validate an admins login, 
+ * register new admins to data file, and display admin information
  * 
  */
 
 public class AdminList
 {
-    ArrayList<Admin> adminlist = new ArrayList(); //creates new array object
+    ArrayList<Admin> adminlist = new ArrayList(); //Makes new adminList array
     
-    //parameterized function adds new administrator to adminList array
+    //Function to add new admin to list
     public void add(Admin a){
         this.adminlist.add(a);
     }
-    //function validates parameters for electronics store administrators
+    
+    
+    //Call to check if a user and password are apart of the adminlist array
     public Admin validateAdmin(String user, String password){
         for(Admin current: this.adminlist)
         {
-            if (current.validateUser(user, password)) //calls validateUser function to validate parameters
+            if (current.validateUser(user, password))
             {
-                return current; //Admin variable
+                return current;
             }
         }
         
         return null;
     }
-    //function updates "admins.txt" as the list of administrators
+    
+    
+    //Function updates data in the admin file to add new admin profile
     public void UpdateAdminFile(){
         String contents = "";
         for(Admin current: this.adminlist)
@@ -38,11 +42,13 @@ public class AdminList
             contents = contents + data;
         }
         
-        FileUtility.writeContent(".\\txtFiles\\admins.txt", contents, false); //updates content the text file
+        FileUtility.writeContent(".\\txtFiles\\admins.txt", contents, false); //writes new data to admin file
     }
-    //function to print text file "admins.txt" into an array
+    
+    
+    //Calls admin data file and adds all present data to the adminList array
     public void populate() throws IOException {
-        ArrayList<String> admins = FileUtility.retrieveContent(".\\txtFiles\\admins.txt"); //copies text file data into new array object
+        ArrayList<String> admins = FileUtility.retrieveContent(".\\txtFiles\\admins.txt"); //copies data from admin file
         
         for(String Current: admins)
         {
@@ -58,10 +64,12 @@ public class AdminList
             
             Admin newAdmin = new Admin(username, password);
             
-            this.add(newAdmin);
+            this.add(newAdmin);//calls to add to list
         }
     }
-     //Check if username exists within Admin List
+    
+    
+     //Call to see if a username is already present in the adminlist
     public boolean validateAdminUsername(String user){
         for(Admin current: this.adminlist)
         {
@@ -72,14 +80,17 @@ public class AdminList
         }
         return false;
     }
-    // this function shows electronics store administrator info
+    
+    
+    // Displays current admin information to the screen
     public void showAdmins(){
         System.out.println();
         System.out.println("List of Registered Administrators\n");
-        for(Admin Current: this.adminlist) //creates loop for each administrator
+        //for all admins in list
+        for(Admin Current: this.adminlist) 
         {
-            
-            System.out.format("Username: %s Password: %s\n", Current.getUsername(), Current.getPassword()); //prints list of administrators.
+            //print information
+            System.out.format("Username: %s Password: %s\n", Current.getUsername(), Current.getPassword()); 
         }
         System.out.println();
     }
