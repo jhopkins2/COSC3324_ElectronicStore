@@ -20,8 +20,9 @@ import java.util.Scanner;
 
 public class FileUtility
 {
+    //declaring a scanner to read in from keyboard 
     private static Scanner scan = new Scanner(System.in);
-    
+    //this method will find take the name and turn it into a file path
     public static String nameToFile(String path, boolean upper){
         path = path.replaceAll("&", ""); //replaces all "&" characters in path with " "
         path = path.replaceAll(" ", "");
@@ -36,12 +37,13 @@ public class FileUtility
         
         return path;
     }
+    //no boolean parameter
     public static String nameToFile(String path){
         return nameToFile(path, false);
     }
-    //function used as utility function retrieve content from array
+    //method used as utility function retrieve content from a file
     public static ArrayList<String> retrieveContent(String path) throws FileNotFoundException, IOException {
-        ArrayList<String> content = new ArrayList();
+        ArrayList<String> content = new ArrayList();//new string array list
         try (FileInputStream in = new FileInputStream(path))
         {
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -65,7 +67,7 @@ public class FileUtility
             return content;
         }
     }
-    //function used as utility function to output content into a file
+    //method used as utility function to write to a file
     public static void writeContent(String path, String contents, boolean append){
         try (FileWriter fw = new FileWriter(path, append);
             BufferedWriter bw = new BufferedWriter(fw);
@@ -78,12 +80,12 @@ public class FileUtility
             System.out.println(e);
         }
     }
-    //function used as utility function to update changing data
+    //method used as utility function to update changing data
     public static void updateContent(String path, String contents){
         writeContent(path, contents, true);
     }
     
-    //function used as a utility function to gain integer user input
+    //method used as a utility function to get integer user input
     public static int integerInput(String prompt){
         System.out.println(prompt);
         
@@ -97,6 +99,7 @@ public class FileUtility
         
         return input;
     }
+    //this method used as a utility function that will get a double from a user input
     public static double doubleInput(String prompt){
         System.out.println(prompt);
         
@@ -110,7 +113,7 @@ public class FileUtility
         
         return input;
     }
-    //function used as a utility function to get user string input
+    //method used as a utility function to get user string input
     public static String stringInput(String prompt){
         System.out.println(prompt);
         
